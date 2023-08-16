@@ -1,0 +1,98 @@
+[
+  {
+    "outputFileName": "wwwroot/js/Scripts/Contact/Contacts.min.js",
+    "inputFiles": [
+      "wwwroot/js/Scripts/Contact/Contacts.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/Scripts/Account/LoginControl.min.js",
+    "inputFiles": [
+      "wwwroot/js/Scripts/Account/LoginControl.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/Scripts/Account/RegisterControl.min.js",
+    "inputFiles": [
+      "wwwroot/js/Scripts/Account/RegisterControl.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/Scripts/BlogPosts/AddBlogPost.min.js",
+    "inputFiles": [
+      "wwwroot/js/Scripts/BlogPosts/AddBlogPost.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/Scripts/BlogPosts/EditBlogPost.min.js",
+    "inputFiles": [
+      "wwwroot/js/Scripts/BlogPosts/EditBlogPost.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/Scripts/Categories/AddCategory.min.js",
+    "inputFiles": [
+      "wwwroot/js/Scripts/Categories/AddCategory.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/Scripts/Categories/EditCategory.min.js",
+    "inputFiles": [
+      "wwwroot/js/Scripts/Categories/EditCategory.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/Scripts/Mode/DarkLightToggle.min.js",
+    "inputFiles": [
+      "wwwroot/js/Scripts/Mode/DarkLightToggle.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/Scripts/Tags/AddTag.min.js",
+    "inputFiles": [
+      "wwwroot/js/Scripts/Tags/AddTag.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/Scripts/Tags/EditTag.min.js",
+    "inputFiles": [
+      "wwwroot/js/Scripts/Tags/EditTag.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/css/CssFiles/AddButton.min.css",
+    "inputFiles": [
+      "wwwroot/css/CssFiles/AddButton.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/css/CssFiles/BlogDetail.min.css",
+    "inputFiles": [
+      "wwwroot/css/CssFiles/BlogDetail.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/css/CssFiles/Category.min.css",
+    "inputFiles": [
+      "wwwroot/css/CssFiles/Category.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/css/CssFiles/TableList.min.css",
+    "inputFiles": [
+      "wwwroot/css/CssFiles/TableList.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/css/CssFiles/EditPages.min.css",
+    "inputFiles": [
+      "wwwroot/css/CssFiles/EditPages.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/css/CssFiles/ContactForm.min.css",
+    "inputFiles": [
+      "wwwroot/css/CssFiles/ContactForm.css"
+    ]
+  }
+]

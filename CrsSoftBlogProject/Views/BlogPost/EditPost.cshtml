@@ -1,0 +1,70 @@
+﻿@model CrsSoftBlogProject.Models.ViewModels.EditBlogPostViewModel
+@{
+}
+
+<link rel="stylesheet" runat="server" media="screen" href="~/css/CssFiles/EditPages.min.css" />
+<script src="~/js/Scripts/BlogPosts/EditBlogPost.min.js" asp-append-version="true"></script>
+
+
+
+<div class="container full-height">
+        @Html.AntiForgeryToken()
+        <h3 class="text-center">Edit Blog Post</h3>
+    <form id="edit" asp-controller="BlogPost" asp-action="EditPost" method="post" class="needs-validation" novalidate autocomplete="off">
+
+        <div class="mb-3">
+            <label class="mb-2" for="Id">Id</label>
+            <input class="form-control" id="id" type="text" name="Id" asp-for="Id" readonly>
+            <span class="text-danger" asp-validation-for="Id"></span>
+        </div>
+
+        <div class="mb-3">
+            <label class="mb-2" for="PageTitle">Page Title</label>
+            <input id="pageTitle" type="text" name="PageTitle" asp-for="PageTitle" required autofocus>
+            <span class="text-danger" asp-validation-for="PageTitle"></span>
+        </div>
+
+        <div class="mb-3">
+            <label class="mb-2" for="PageContent">Page Content</label>
+            <textarea id="PageContent" class="form-control" name="PageContent" asp-for="PageContent" placeholder="Write something.." style="height:200px" required autofocus></textarea>
+            <span class="text-danger" asp-validation-for="PageContent"></span>
+
+        </div>
+
+        <div class="mb-3">
+            <label class="mb-2" for="Description">Description</label>
+            <input id="description" type="text" class="form-control" name="Description" asp-for="Description" required autofocus>
+            <span class="text-danger" asp-validation-for="Description"></span>
+
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Featured Image Upload</label>
+            <input type="file" id="featuredImageUpload" class="form-control" />
+            <img src="" id="featuredImageDisplay" style="display:none;width: 300px;" />
+        </div>
+
+        <div class="mb-3">
+            <label class="mb-2" for="FeaturedImageUrl">Featured Image URL</label>
+            <input id="featuredImageUrl" type="text" class="form-control" name="FeaturedImageUrl" asp-for="FeaturedImageUrl" required autofocus>
+            <span class="text-danger" asp-validation-for="FeaturedImageUrl"></span>
+
+        </div>
+
+        <div class="mb-3">
+            <button type="submit" class="btn btn-dark">Save Changes</button>
+
+            <button asp-action="BlogList" class="btn btn-danger ms-2" id="btnDelete" type="button">
+                Delete
+            </button>
+            <a class="btn btn-primary ms-2" href="@Url.Action("BlogList", "BlogPost")">Go Back to List Page</a>
+        </div>
+
+    </form>
+    <div class="container py-2">
+        <div id="successMessage" class="alert alert-success" style="display: none;">
+            Blog post edited successfully!
+        </div>
+    </div>
+</div>
+

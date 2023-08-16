@@ -1,0 +1,25 @@
+﻿@model CrsSoftBlogProject.Models.ViewModels.EditUserViewModel
+
+<h1>Edit User Role - @Model.UserName</h1>
+
+<form asp-action="EditUser" method="post">
+    @Html.AntiForgeryToken()
+
+    <div>
+        <label>Current Role: @Model.CurrentRole</label>
+    </div>
+
+    <div>
+        <label for="NewRole">New Role:</label>
+        <select id="NewRole" asp-for="NewRole" asp-items="@ViewBag.CurrentRole">
+            <option value="">Select a new role</option>
+        </select>
+    </div>
+
+    <button type="submit">Save Changes</button>
+</form>
+
+
+<div>
+<a asp-action="Index">Back to List</a>
+</div>

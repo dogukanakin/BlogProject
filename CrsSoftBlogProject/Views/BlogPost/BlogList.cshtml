@@ -1,0 +1,120 @@
+﻿@model List<CrsSoftBlogProject.Models.Domain.BlogPostDomain>
+@using Microsoft.AspNetCore.Identity;
+@inject SignInManager<IdentityUser> signInManager
+
+
+<link rel="stylesheet" runat="server" media="screen" href="~/css/CssFiles/TableList.min.css" />
+
+
+@if (signInManager.IsSignedIn(User))
+{
+    <section class="contact_us">
+        <div class="py-2">
+            <h1>Show All Blogs - Admin Functionality</h1>
+            <div class="py-5">
+                @if (Model != null && Model.Any())
+                {
+                    <div class="table-radius">
+                        <table class="table  align-middle mb-0 table-striped custom-table ">
+                            <thead class="table-color text-center">
+                                <tr>
+                                    <th>#</th>
+                                    <th>PageTitle</th>
+                                    <th>PageContent</th>
+                                    <th>Description</th>
+                                    <th>FeaturedImageUrl</th>
+                                    <th>SelectedTag</th>
+                                    <th>Edit</th>
+                                </tr>
+                            </thead>
+                            <tbody class="table-group-divider">
+                                @{
+                                    int rowNumber = 1;
+                                }
+                                @foreach (var blogPost in Model)
+                                {
+                                    <tr scope="row" class="text-center">
+                                        <td>@rowNumber</td>
+
+                                        @if (blogPost.PageTitle.Length > 20)
+                                        {
+                                            <td>@blogPost.PageTitle.Substring(0,20)...</td>
+
+                                        }
+                                        else
+                                        {
+                                            <td>@blogPost.PageTitle</td>
+
+                                        }
+
+                                        <td>
+                                            @if (blogPost.PageContent.Length > 20)
+                                            {
+                                                <span>@blogPost.PageContent.Substring(0, 20)...</span>
+                                            }
+                                            else
+                                            {
+                                                @blogPost.PageContent
+                                            }
+                                        </td>
+                                        <td>
+                                            @if (blogPost.Description.Length > 20)
+                                            {
+                                                <span>@blogPost.Description.Substring(0, 20)...</span>
+                                            }
+                                            else
+                                            {
+                                                @blogPost.Description
+                                            }
+                                        </td>
+                                        <td>
+                                            @if (blogPost.FeaturedImageUrl.Length > 20)
+                                            {
+                                                <span>@blogPost.FeaturedImageUrl.Substring(0, 20)...</span>
+                                            }
+                                            else
+                                            {
+                                                @blogPost.FeaturedImageUrl
+                                            }
+                                        </td>
+                                        <td>@blogPost.SelectedTag</td>
+                                        <td>
+                                            <a class="badge" asp-area="" asp-controller="BlogPost"
+                                               asp-action="EditPost"
+                                               asp-route-id="@blogPost.Id">Edit</a>
+
+                                        </td>
+                                    </tr>
+                                    rowNumber++;
+
+                                }
+                            </tbody>
+                        </table>
+
+                    </div>
+
+                }
+                else
+                {
+                    <p>No tags found!</p>
+                }
+            </div>
+        </div>
+    </section>
+
+
+}
+else
+{
+    <div class="py-2 text-center">
+        <div class="container">
+            <h1>Bu sayfaya erişiminiz yok</h1>
+        </div>
+    </div>
+}
+
+
+
+   
+
+

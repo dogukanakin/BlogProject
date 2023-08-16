@@ -1,0 +1,70 @@
+﻿@model List<CrsSoftBlogProject.Models.Domain.CategoriesDomain>
+@using Microsoft.AspNetCore.Identity;
+@inject SignInManager<IdentityUser> signInManager
+
+<link rel="stylesheet" runat="server" media="screen" href="~/css/CssFiles/TableList.min.css" />
+
+@if (signInManager.IsSignedIn(User))
+{
+    <section class="contact_us">
+        <div class="full-height">
+            <div class="py-2">
+                <div class="container">
+                    <h1>Show All Categories - Admin Functionality</h1>
+                </div>
+            </div>
+
+            <div class="container py-5">
+                @if (Model != null && Model.Any())
+                {
+                    <div class="table-radius">
+
+
+
+                        <table class="table  align-middle mb-0 table-striped custom-table">
+                            <thead class="table-color text-center">
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Name</th>
+                                    <th scope="col">Edit</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @{
+                                    int rowNumber = 1;
+                                }
+                                @foreach (var category in Model)
+                                {
+                                    <tr scope="row" class="text-center">
+                                        <td>@rowNumber</td>
+                                        <td>@category.CategoriesName</td>
+                                        <td>
+                                            <a class="badge" asp-area="" asp-controller="AdminCategories"
+                                               asp-action="CategoriesEdit"
+                                               asp-route-id="@category.Id">Edit</a>
+                                        </td>
+                                    </tr>
+                                    rowNumber++;
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+
+                }
+                else
+                {
+                    <p>No categories found!</p>
+                }
+            </div>
+        </div>
+    </section>
+
+}
+else
+{
+    <div class="py-2 text-center">
+        <div class="container">
+            <h1>Bu sayfaya erişiminiz yok</h1>
+        </div>
+    </div>
+}

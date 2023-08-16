@@ -1,0 +1,56 @@
+﻿@using Microsoft.AspNetCore.Identity;
+@inject SignInManager<IdentityUser> signInManager
+
+@model CrsSoftBlogProject.Models.ViewModels.EditCategoriesViewModel
+
+<script src="~/js/Scripts/Categories/EditCategory.min.js" asp-append-version="true"></script>
+
+@if (signInManager.IsSignedIn(User))
+{
+    <div class="py-2">
+        <div class="container">
+            <h1>Edit Category - Admin Functionality</h1>
+        </div>
+    </div>
+
+    <div class="container py-5">
+        <form id="editCategory" asp-controller="AdminCategories" asp-action="CategoriesEdit" method="post">
+            @Html.AntiForgeryToken()
+            <div class="mb-3">
+                <label class="mb-2" for="Id">Id</label>
+                <input class="form-control" id="id" type="text" name="Id" asp-for="Id" readonly>
+                <span class="text-danger" asp-validation-for="Id"></span>
+            </div>
+
+            <div class="mb-3">
+                <label class="mb-2" for="CategoriesName">Category Name</label>
+                <input id="categoriesName" type="text" class="form-control" name="CategoriesName" asp-for="CategoriesName" required autofocus>
+                <span class="text-danger" asp-validation-for="CategoriesName"></span>
+            </div>
+
+
+            <div class="mb-3">
+                <input type="hidden" name="Id" value="@Model.Id">
+                <button type="submit" class="btn btn-dark">Save Changes</button>
+
+                <button asp-action="Delete" asp-area="" asp-controller="AdminCategories" class="btn btn-danger ms-2" id="btnDelete" type="button">
+                    Delete
+                </button>
+                <a class="btn btn-primary ms-2" href="@Url.Action("CategoriesList", "AdminCategories")">Go Back to List Page</a>
+            </div>
+        </form>
+        <div class="container py-2">
+            <div id="successMessage" class="alert alert-success" style="display: none;">
+                Blog post edited successfully!
+            </div>
+        </div>
+    </div>
+
+} else
+{
+    <div class="py-2">
+        <div class="container">
+            <h1>Bu sayfaya erişiminiz yok</h1>
+        </div>
+    </div>
+}

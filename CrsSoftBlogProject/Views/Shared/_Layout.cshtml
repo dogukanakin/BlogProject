@@ -1,0 +1,219 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> signInManager
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - CrsSoftBlogProject</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/CrsSoftBlogProject.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <link href='https://cdn.jsdelivr.net/npm/froala-editor@latest/css/froala_editor.pkgd.min.css' rel='stylesheet' type='text/css' />
+    <script type='text/javascript' src='https://cdn.jsdelivr.net/npm/froala-editor@latest/js/froala_editor.pkgd.min.js'></script>
+    <script src="~/js/Scripts/Mode/DarkLightToggle.js" asp-append-version="true"></script>
+</head>
+
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-backgorund">
+            <div class="container-fluid">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <a class="navbar-brand navbar-title fw-bold fs-3" href="/">CrsSoft</a>
+                <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+                        <li class="nav-item">
+                            <a class="nav-link fs-4" href="@Url.Action("News", "Home")">News</a>
+                        </li>
+                       
+                        <li class="nav-item">
+                            <a class="nav-link fs-4" href="@Url.Action("ContactForm", "Contact")">Contact</a>
+                        </li>
+
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle fs-4" href="#" id="navbarDropdownCategories" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Categories
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdownCategories">
+                                <li><a class="dropdown-item" href="@Url.Action("Technology", "BlogDetails")">Technology</a></li>
+                                <li><a class="dropdown-item" href="@Url.Action("Phone", "BlogDetails")">Phone</a></li>
+                                <li><a class="dropdown-item" href="@Url.Action("Computer", "BlogDetails")">Computer</a></li>
+
+                            </ul>
+                        </li>
+
+                        @if (signInManager.IsSignedIn(User))
+                        {
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle fs-4" href="#" id="navbarDropdownPanel" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Panel
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="navbarDropdownPanel">
+                                    <li><a class="dropdown-item py-1" href="@Url.Action("CreatePost", "BlogPost")">Create Post</a></li>
+                                    <li><a class="dropdown-item py-1" href="@Url.Action("BlogList", "BlogPost")">Blog Post List</a></li>
+                                    <li><a class="dropdown-item py-1" href="@Url.Action("Add", "AdminTags")">Admin Tag Add Panel</a></li>
+                                    <li><a class="dropdown-item py-1" href="@Url.Action("List", "AdminTags")">Admin Tags List Panel</a></li>
+                                    @if (User.IsInRole("User"))
+                                    {
+                                        <li><a class="dropdown-item py-1" href="@Url.Action("Users", "UserList")">Admin Users List</a></li>
+                                    }
+                                    <li><a class="dropdown-item py-1" href="@Url.Action("AddCategories", "AdminCategories")">Admin Categories Panel</a></li>
+                                    <li><a class="dropdown-item py-1" href="@Url.Action("Categorieslist", "AdminCategories")">Admin Categories List Panel</a></li>
+                                </ul>
+                            </li>
+                           
+                        }
+
+                    </ul>
+
+
+                       
+                    <form action="@Url.Action("News", "Home")"  class="d-flex align-items-center px-3">
+                        <input type="search" id="searchInput" class="form-control me-2" placeholder="Search by Page Title...">
+                        <button class="btn btn-outline-primary" type="button" id="searchButton">Search</button>
+                    </form>
+
+                    <script>
+                        $(document).ready(function () {
+                            $("#searchButton").on("click", function () {
+                                var searchTerm = $("#searchInput").val().trim().toLowerCase();
+                                sessionStorage.setItem("savedSearchTerm", searchTerm);
+                                window.location.href = "@Url.Action("News", "Home")";
+                            });
+
+                            var savedSearchTerm = sessionStorage.getItem("savedSearchTerm");
+                            if (savedSearchTerm) {
+                                $("#searchInput").val(savedSearchTerm);
+                                filterBlogGrid(savedSearchTerm);
+                            }
+
+                            function filterBlogGrid(searchTerm) {
+                                $(".blog-grid").each(function () {
+                                    var pageTitle = $(this).find(".title").text().trim().toLowerCase();
+                                    if (pageTitle.includes(searchTerm)) {
+                                        $(this).show();
+                                    } else {
+                                        $(this).hide();
+                                        $("#searchInput").val('');
+
+                                    }
+                                });
+                            }
+                        });
+                    </script>
+
+
+                    <form class="d-flex">
+                        @if (signInManager.IsSignedIn(User))
+                        {
+                            <div class="d-flex align-items-center">
+                                <div class="nav-item text-light me-2">
+                                    Welcome, @User.Identity.Name!
+                                </div>
+                                <a class="btn btn-primary button-login btn-lg navbar-button mx-2" href="@Url.Action("Logout", "Account")">Logout</a>
+                                <div class="toggle-container">
+                                    <label class="toggle-button" for="darkModeCheckbox">
+                                        <div class="sun-moon-toggle">
+                                            <a style="cursor:pointer">
+                                                <i class="fa fa-moon-o" style="font-size:50px; color: #fdd522;"></i>
+                                                <i class="fa fa-sun-o" style="font-size:50px; color: #ff6d05;"></i>
+
+                                            </a>
+                                        </div>
+                                    </label>
+                                    <input type="checkbox" id="darkModeCheckbox" class="d-none">
+                                </div>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="d-flex align-items-center">
+                                <a class="btn btn-primary button-login btn-lg navbar-button mx-2" href="@Url.Action("Login", "Account")">Login</a>
+                                <a class="btn btn-primary button-login btn-lg navbar-button mx-2" href="@Url.Action("Register", "Account")">Register</a>
+                                <div class="toggle-container">
+                                    <label class="toggle-button" for="darkModeCheckbox">
+                                        <div class="sun-moon-toggle">
+                                            <a style="cursor:pointer">
+                                                <i class="fa fa-moon-o" style="font-size:50px; color: #fdd522;"></i>
+                                                <i class="fa fa-sun-o" style="font-size:50px; color: #ff6d05;"></i>
+
+                                            </a>
+                                        </div>
+                                    </label>
+                                    <input type="checkbox" id="darkModeCheckbox" class="d-none">
+                                </div>
+                            </div>
+                        }
+                    </form>
+
+                </div>
+            </div>
+        </nav>   
+    </header>
+
+    <div id="bg-color" class="bg-color full-height">
+        <div class="container">
+            <main role="main" class="pb-3">
+                @RenderBody()
+            </main>
+        </div>
+    </div>
+
+    <footer class="border-top footer">
+        <div class="container">
+            <div class="mt-5 pt-5 pb-5">
+                <div class="container text">
+                    <div class="row">
+                        <div class="col-sm-4 column-width col-xs-12">
+                            <h2 class="navbar-brand navbar-title fw-bold fs-3">CrsSoft</h2>
+                            <p class="text-white-50 multi-line footer-info">
+                                Founded in 2010, Crs Soft is an international technology company that provides consulting and software development services.
+                            </p>
+                            <p class="col footer-social-media">
+                                <a href="#"><i class="fa fa-facebook-square mr-1 rounded-circle"></i></a>
+                                <a href="#"><i class="fa fa-linkedin-square mr-1 rounded-circle"></i></a>
+                            </p>
+                        </div>
+
+                        <div class="col-sm-4 column-width">
+                            <h4 class="mt-lg-0 mt-sm-3 text-white">Links</h4>
+                            <ul class="m-0 p-0">
+                                <li class="link-underline-light"><a href="#">Lorem mauris</a></li>
+                                <li class="link-underline-light"><a href="#">Nam mauris velit</a></li>
+                                <li class="link-underline-light"><a href="#">Etiam vitae mauris</a></li>
+                                <li class="link-underline-light"><a href="#">Fusce scelerisque</a></li>
+                                <li class="link-underline-light"><a href="#">Sed faucibus</a></li>
+                                <li class="link-underline-light"><a href="#">Mauris efficitur nulla</a></li>
+                            </ul>
+                        </div>
+
+                        <div class="col column-width location">
+                            <h4 class="mt-lg-0 mt-sm-4 text-white">Location</h4>
+                            <p>22, Lorem ipsum dolor, consectetur adipiscing</p>
+                            <p><i class="fa fa-phone"></i>(541) 754-3010</p>
+                            <p><i class="fa fa-envelope"></i>info@hsdf.com</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
+
+
+

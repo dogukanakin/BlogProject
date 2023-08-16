@@ -1,0 +1,118 @@
+﻿
+
+<style>
+  
+
+    img {
+        vertical-align: middle;
+        border-radius: 1.2rem;
+    }
+
+    .container {
+        position: relative;
+    }
+
+    .mySlides {
+        display: none;
+    }
+
+    .cursor {
+        cursor: pointer;
+    }
+
+    
+    .row:after {
+        content: "";
+        display: table;
+        clear: both;
+    }
+
+    .column {
+        float: left;
+        width: 16.66%;
+    }
+
+    .demo {
+        opacity: 0.6;
+    }
+
+        .active,
+        .demo:hover {
+            opacity: 1;
+        }
+
+    .thumbnail-container {
+        text-align: center;
+        margin-top: 20px;
+    }
+
+    .thumbnail {
+        display: inline-block;
+        margin: 0 10px;
+        cursor: pointer;
+        opacity: 0.6;
+        border: 2px solid transparent; 
+    }
+    .thumbnail:hover {
+        opacity: 1;
+        border-color: black;
+    }
+    .contact-us {
+        background-color: #f1f1f1;
+        padding: 120px 0px;
+        border-radius: 2rem;
+    }
+</style>
+
+<div class="contact-us">
+    <h2 style="text-align:center">Slideshow Gallery</h2>
+    <div class="container">
+        @for (var i = 0; i < Math.Min(Model.Count, 6); i++)
+        {
+            var blogPost = Model[i];
+            <div class="mySlides text-center">
+                <img class="cursor text-center" onclick="location.href='@Url.Action("Blog", "BlogDetails", new { id = blogPost.Id })'" src="@blogPost.FeaturedImageUrl" style="width:400px; height:400px;">
+                <h3 class="h3 mb-3 title fw-bold text-center text-uppercase">@blogPost.PageTitle</h3>
+            </div>
+        }
+    </div>
+    <div class="thumbnail-container">
+        @for (var i = 0; i < Math.Min(Model.Count, 6); i++)
+        {
+            var thumbnailBlogPost = Model[i];
+            <img  class="thumbnail cursor" src="@thumbnailBlogPost.FeaturedImageUrl" style="width:100px; height:100px;" onclick="currentSlide(@i + 1)">
+        }
+    </div>
+</div>
+
+     
+<script>
+    let slideIndex = 1;
+    showSlides(slideIndex);
+
+    function plusSlides(n) {
+        showSlides(slideIndex += n);
+    }
+
+    function currentSlide(n) {
+        showSlides(slideIndex = n);
+    }
+
+    function showSlides(n) {
+        let i;
+        let slides = document.getElementsByClassName("mySlides");
+        let dots = document.getElementsByClassName("demo");
+        let captionText = document.getElementById("caption");
+        if (n > slides.length) { slideIndex = 1 }
+        if (n < 1) { slideIndex = slides.length }
+        for (i = 0; i < slides.length; i++) {
+            slides[i].style.display = "none";
+        }
+        for (i = 0; i < dots.length; i++) {
+            dots[i].className = dots[i].className.replace(" active", "");
+        }
+        slides[slideIndex - 1].style.display = "block";
+        dots[slideIndex - 1].className += " active";
+        captionText.innerHTML = dots[slideIndex - 1].alt;
+    }
+</script>

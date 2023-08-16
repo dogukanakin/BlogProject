@@ -1,0 +1,53 @@
+﻿@using Microsoft.AspNetCore.Identity;
+@inject SignInManager<IdentityUser> signInManager
+
+@model CrsSoftBlogProject.Models.ViewModels.AddTagRequestViewModel
+
+<script src="~/js/Scripts/Tags/AddTag.min.js" asp-append-version="true"></script>
+
+<link rel="stylesheet" runat="server" media="screen" href="~/css/CssFiles/AddButton.min.css" />
+
+@if (signInManager.IsSignedIn(User))
+{
+    <div class="py-2">
+        <div class="container">
+            <h1>Add New Tag - Admin Functionality</h1>
+        </div>
+    </div>
+
+    <div class="container py-5">
+        <form id="addTagForm" method="post">
+            <div class="mb-3">
+                <label class="form-label">Name</label>
+                <input type="text" class="form-control" id="name" asp-for="Name" required />
+                <span class="text-danger" asp-validation-for="Name"></span>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Display Name</label>
+                <input type="text" class="form-control" id="displayName" asp-for="DisplayName" required />
+                <span class="text-danger" asp-validation-for="DisplayName"></span>
+            </div>
+
+            <div class="text-center">
+                <input class="text-center" type="submit" value="Submit">
+            </div>
+
+        </form>
+        <div class="container py-2">
+            <div id="successMessage" class="alert alert-success" style="display: none;">
+                Tag added successfully!
+            </div>
+        </div>
+    </div>
+
+
+
+} else
+{
+    <div class="py-2 text-center">
+        <div class="container">
+            <h1>Bu sayfaya erişiminiz yok</h1>
+        </div>
+    </div>
+}

@@ -1,0 +1,45 @@
+﻿@model CrsSoftBlogProject.Models.ViewModels.AddCategoriesViewModel
+@using Microsoft.AspNetCore.Identity;
+@inject SignInManager<IdentityUser> signInManager
+
+<link rel="stylesheet" runat="server" media="screen" href="~/css/CssFiles/AddButton.min.css" />
+<script src="~/js/Scripts/Categories/AddCategory.min.js" asp-append-version="true"></script>
+
+@if (signInManager.IsSignedIn(User))
+{
+    <div class="py-2">
+        <div class="container">
+            <h1>Add New Categories - Admin Functionality</h1>
+        </div>
+    </div>
+
+    <div class="container py-5">
+        <form id="addCategoriesForm" method="post">
+            <div class="mb-3">
+                <label class="form-label">Name</label>
+                <input type="text" class="form-control" id="categoriesName" asp-for="CategoriesName" required />
+                <span class="text-danger" asp-validation-for="CategoriesName"></span>
+            </div>
+
+
+            <div class="text-center">
+                <input class="text-center btn btn-primary" type="submit" value="Submit">
+            </div>
+        </form>
+        <div class="container py-2">
+            <div id="successMessage" class="alert alert-success" style="display: none;">
+                Tag added successfully!
+            </div>
+        </div>
+    </div>
+} else
+{
+     <div class="py-2 text-center">
+        <div class="container">
+            <h1>Bu sayfaya erişiminiz yok</h1>
+        </div>
+    </div>
+
+}
+
+

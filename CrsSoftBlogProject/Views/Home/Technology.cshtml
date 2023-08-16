@@ -1,0 +1,367 @@
+﻿@model List<CrsSoftBlogProject.Models.Domain.BlogPostDomain>
+
+@{
+    ViewData["Title"] = "Technology";
+}
+
+
+
+
+<style>
+    .blog-grid {
+        position: relative;
+        box-shadow: 0 1rem 1.75rem 0 rgba(45, 55, 75, 0.1);
+        height: 100%;
+        border: 10px solid black);
+        border-radius: 0.25rem;
+        transition: all .2s ease-in-out;
+    }
+
+        .blog-grid span {
+            color: #292dc2
+        }
+
+        .blog-grid img {
+            width: 100%;
+            height: 20rem;
+            border-top-left-radius: 0.25rem;
+            border-top-right-radius: 0.25rem
+        }
+
+    .blog-grid-text {
+        position: relative
+    }
+
+        .blog-grid-text > span {
+            color: #292dc2;
+            font-size: 13px;
+            padding-right: 5px
+        }
+
+        .blog-grid-text h4 {
+            line-height: normal;
+            margin-bottom: 15px
+        }
+
+        .blog-grid-text .meta-style2 {
+            border-top: 1px dashed #cee1f8;
+            padding-top: 15px
+        }
+
+            .blog-grid-text .meta-style2 ul li {
+                margin-bottom: 0;
+                font-weight: 500
+            }
+
+                .blog-grid-text .meta-style2 ul li:last-child {
+                    margin-right: 0
+                }
+
+        .blog-grid-text ul {
+            margin: 0;
+            padding: 0
+        }
+
+            .blog-grid-text ul li {
+                display: inline-block;
+                font-size: 14px;
+                font-weight: 500;
+                margin: 5px 10px 5px 0
+            }
+
+                .blog-grid-text ul li:last-child {
+                    margin-right: 0
+                }
+
+                .blog-grid-text ul li i {
+                    font-size: 14px;
+                    font-weight: 600;
+                    margin-right: 5px
+                }
+
+        .blog-grid-text p {
+            font-weight: 400;
+            padding: 0
+        }
+
+    .blog-list-left-heading:after,
+    .blog-title-box:after {
+        content: '';
+        height: 2px
+    }
+
+    .blog-grid-simple-content a:hover {
+        color: #1d184a
+    }
+
+        .blog-grid-simple-content a:hover:after {
+            color: #1d184a
+        }
+
+    .blog-grid-text {
+        position: relative
+    }
+
+        .blog-grid-text > span {
+            color: #292dc2;
+            font-size: 13px;
+            padding-right: 5px
+        }
+
+        .blog-grid-text h4 {
+            line-height: normal;
+            margin-bottom: 15px
+        }
+
+        .blog-grid-text .meta-style2 {
+            border-top: 1px dashed #cee1f8 !important;
+            padding-top: 15px
+        }
+
+            .blog-grid-text .meta-style2 ul li {
+                margin-bottom: 0;
+                font-weight: 500
+            }
+
+                .blog-grid-text .meta-style2 ul li:last-child {
+                    margin-right: 0
+                }
+
+        .blog-grid-text ul {
+            margin: 0;
+            padding: 0
+        }
+
+            .blog-grid-text ul li {
+                display: inline-block;
+                font-size: 14px;
+                font-weight: 500;
+                margin: 5px 10px 5px 0
+            }
+
+                .blog-grid-text ul li:last-child {
+                    margin-right: 0
+                }
+
+                .blog-grid-text ul li i {
+                    font-size: 14px;
+                    font-weight: 600;
+                    margin-right: 5px
+                }
+
+        .blog-grid-text p {
+            font-weight: 400;
+            padding: 0
+        }
+
+    a, a:active, a:focus {
+        color: #575a7b;
+        text-decoration: none;
+        transition-timing-function: ease-in-out;
+        -ms-transition-timing-function: ease-in-out;
+        -moz-transition-timing-function: ease-in-out;
+        -webkit-transition-timing-function: ease-in-out;
+        -o-transition-timing-function: ease-in-out;
+        transition-duration: .2s;
+        -ms-transition-duration: .2s;
+        -moz-transition-duration: .2s;
+        -webkit-transition-duration: .2s;
+        -o-transition-duration: .2s;
+    }
+
+    .pagination {
+        border-radius: 0;
+        padding: 0;
+        margin: 0
+    }
+
+        .pagination ul {
+            display: inline-block;
+            *display: inline;
+            *zoom: 1;
+            margin: 0 auto;
+            padding: 0
+        }
+
+        .pagination li {
+            display: inline
+        }
+
+        .pagination a {
+            float: left;
+            padding: 0 18px;
+            line-height: 40px;
+            text-decoration: none;
+            border: 1px solid #dbdbdb;
+            border-left-width: 0;
+            background: #fff
+        }
+
+            .pagination a:hover {
+                background-color: #1d184a;
+                color: #fff
+            }
+
+        .pagination .active a {
+            background-color: #f7f7f7;
+            color: #999;
+            cursor: default
+        }
+
+        .pagination .disabled span {
+            color: #999;
+            background-color: transparent;
+            cursor: default
+        }
+
+        .pagination .disabled a {
+            color: #999;
+            background-color: transparent;
+            cursor: default
+        }
+
+            .pagination .disabled a:hover {
+                color: #999;
+                background-color: transparent;
+                cursor: default
+            }
+
+        .pagination li:first-child a {
+            border-left-width: 1px
+        }
+
+    .mt-6, .my-6 {
+        margin-top: 3.5rem;
+    }
+
+    .blog-grid {
+        /* Existing styles */
+        position: relative;
+    }
+
+    .meta {
+        background-color: rgb(232,232,238);
+    }
+
+    .texts {
+        width: 100%;
+        height: 20rem;
+        border-top-left-radius: 0.25rem;
+        border-top-right-radius: 0.25rem;
+    }
+    
+</style>
+
+<div class="row mt-n5">
+        <div class="container">
+            <h1 class="text-center">Technology</h1>
+            <div class="row mt-n5">
+                @if (Model != null && Model.Any())
+                {
+                    @foreach (var blogPost in Model)
+                    {
+                        <div class="col-md-6 col-lg-4 mt-4 wow fadeInUp" data-wow-delay=".2s" style="visibility: visible; animation-delay: 0.2s; animation-name: fadeInUp;">
+                            <div class="blog-grid bg-light">
+                                <div class="mb-1  p-5">
+                                    <img src="@blogPost.FeaturedImageUrl" alt="@blogPost.PageTitle" class="blog-grid-img position-relative" />
+                                    <div class="blog-grid-text p-4">
+                                        <h3 class="h5 mb-3"><a href="#!">@blogPost.PageTitle</a></h3>
+                                        <div class="texts">
+                                            @if (blogPost.Description.Length > 150)
+                                            {
+                                                <p>@blogPost.Description.Substring(0, 150)...</p>
+                                                <p class="fw-bold">@blogPost.Author</p>
+                                                <a class="badge bg-secondary">@blogPost.SelectedTag</a>
+                                                <a class="badge bg-secondary">@blogPost.CategoriesName</a>
+                                            }
+                                            else
+                                            {
+                                                @blogPost.Description
+                                                <p class="fw-bold">@blogPost.Author</p>
+                                                <a class="badge bg-secondary">@blogPost.SelectedTag</a>
+                                                <a class="badge bg-secondary">@blogPost.CategoriesName</a>
+
+                                            }
+                                        </div>
+
+                                         <div class="meta meta-style ">
+                                                <ul>
+                                                    <li><i class="fas fa-calendar-alt"></i> </li>
+                                                    <li><i class="fas fa-user"></i> @blogPost.Author</li>
+                                                    <li><i class="fas fa-comments"></i> 38</li>
+                                                    <li><i class="fas fa-like"></i> 38</li>
+                                                </ul>
+                                                <br />
+                                           
+                                        </div>
+                                        <div class="button text-center mt-4">
+                                            <a class="btn btn-dark  text-center"
+                                               asp-area=""
+                                               asp-controller="Home"
+                                               asp-action="BlogDetails"
+                                               asp-route-id="@blogPost.Id">Read More</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                }
+                else
+                {
+                    <p>No Tags Found</p>
+                }
+            </div>
+        </div>
+
+    
+</div>
+
+
+@*<div class="row mt-6 wow fadeInUp" data-wow-delay=".6s" style="visibility: visible; animation-delay: 0.6s; animation-name: fadeInUp;">
+            <div class="col-12">
+                <div class="pagination text-small text-uppercase text-extra-dark-gray">
+                    @{
+                        var currentPage = ViewBag.CurrentPage;
+                        var totalPages = ViewBag.TotalPages;
+                        var category = ViewBag.Category;
+                        var nextPage = currentPage + 1;
+                    }
+
+                    <ul class="pagination">
+                        @if (currentPage > 1)
+                        {
+                            <li><a href="@Url.Action("Index", "Home", new { category = category, page = currentPage - 1 })"><i class="fas fa-long-arrow-alt-left me-1 d-none d-sm-inline-block"></i> Prev</a></li>
+                        }
+                        else
+                        {
+                            <li class="disabled"><a href="#"><i class="fas fa-long-arrow-alt-left me-1 d-none d-sm-inline-block"></i> Prev</a></li>
+                        }
+
+                        @for (int i = 1; i <= totalPages; i++)
+                        {
+                            if (i == currentPage)
+                            {
+                                <li class="active"><a href="@Url.Action("Index", "Home", new { category = category, page = i })">@i</a></li>
+                            }
+                            else
+                            {
+                                <li><a href="@Url.Action("Index", "Home", new { category = category, page = i })">@i</a></li>
+                            }
+                        }
+
+                        @if (currentPage < totalPages)
+                        {
+                            <li><a href="@Url.Action("Index", "Home", new { category = category, page = nextPage })">Next <i class="fas fa-long-arrow-alt-right ms-1 d-none d-sm-inline-block"></i></a></li>
+                        }
+                        else
+                        {
+                            <li class="disabled"><a href="#">Next <i class="fas fa-long-arrow-alt-right ms-1 d-none d-sm-inline-block"></i></a></li>
+                        }
+                    </ul>
+
+
+                </div>
+            </div>
+        </div>
+*@

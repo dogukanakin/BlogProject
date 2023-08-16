@@ -1,0 +1,82 @@
+﻿@model List<CrsSoftBlogProject.Models.Domain.BlogPostDomain>
+
+@{
+    ViewData["Title"] = "Computer";
+}
+
+<link rel="stylesheet" runat="server" media="screen" href="~/css/CssFiles/Category.css" />
+
+<div class="row mt-n5">
+    <div class="container">
+        <h1 class="text-center">Computer</h1>
+        <div class="row mt-n5">
+            @if (Model != null && Model.Any())
+            {
+                @foreach (var blogPost in Model)
+                {
+                    <div class="col-md-6 col-lg-4 mt-4">
+                        <div class="blog-grid bg-light">
+                            <div class="col">
+                                <div class="card shadow-sm">
+                                    <img src="@blogPost.FeaturedImageUrl" class="bd-placeholder-img card-img-top" />
+
+                                    <div class="card-body">
+                                        @if (blogPost.PageTitle.Length > 30)
+                                        {
+                                            <h3 class="h5 mb-3 title text-uppercase">@blogPost.PageTitle.Substring(0, 30)...</h3>
+
+                                        }
+                                        else
+                                        {
+                                            <h3 class="h5 mb-3 title text-uppercase">@blogPost.PageTitle</h3>
+
+                                        }
+
+                                        @if (blogPost.Description.Length > 55)
+                                        {
+                                            <p class="card-text">@blogPost.Description.Substring(0, 55)...</p>
+                                        }
+                                        else
+                                        {
+                                            <p class="card-text">@blogPost.Description</p>
+                                        }
+                                        <div class="tags">
+                                            <p class="fw-bold">@blogPost.Author</p>
+                                            <a class="badge ">@blogPost.SelectedTag</a>
+                                            <a class="badge ">@blogPost.CategoriesName</a>
+                                        </div>
+                                        <div class="d-flex justify-content-between align-items-center mt-3">
+                                            <div class="btn-group">
+                                                <a class="contact_form_submit" href="@Url.Action("Blog", "BlogDetails", new { id = @blogPost.Id })" class="">Read More</a>
+                                            </div>
+                                            <small class="text-body-secondary fw-bold">
+                                                @if (blogPost.PageContent.Length > 100000)
+                                                {
+
+                                                    <p> 15 mins</p>
+
+                                                }
+                                                else
+                                                {
+                                                    <p> 9 mins</p>
+
+                                                }
+                                            </small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                } 
+            }
+            else
+            {
+                <p>No Tags Found</p>
+            }
+        </div>
+    </div>
+
+</div>
+
+
